@@ -1,11 +1,22 @@
-import pygame
+import datetime
+def calculate_countdown(target_date):
+ current_date = datetime.datetime.now()
+ time_left = target_date - current_date
+ return time_left
 
-def play_music(file_path):
- pygame.init()
- pygame.mixer.init()
- pygame.mixer.music.load(file_path)
- pygame.mixer.music.play()
+# Get the target date from the user
+target_date_str = input("Enter the target date (YYYY-MM-DD): ")
+target_date = datetime.datetime.strptime(target_date_str, "%Y-%m-%d")
 
-# Usage
-file_path = "music.mp3"
-play_music(file_path)
+# Calculate the countdown
+countdown = calculate_countdown(target_date)
+
+# Display the countdown
+days = countdown.days
+hours, remainder = divmod(countdown.seconds, 3600)
+minutes, seconds = divmod(remainder, 60)
+print("Countdown:")
+print("Days:", days)
+print("Hours:", hours)
+print("Minutes:", minutes)
+print("Seconds:", seconds)
